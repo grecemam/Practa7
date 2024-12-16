@@ -16,16 +16,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install .NET Framework Build Tools
+    - name: Install Visual Studio Build Tools
       run: |
         choco install visualstudio2022buildtools -y
         choco install netfx-4.7.2-devpack -y
 
+    - name: Add MSBuild to PATH
+      run: |
+        echo "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
     - name: Restore dependencies
-      run: nuget restore
+      run: nuget restore 
 
     - name: Build project
       run: msbuild /p:Configuration=Release /p:Platform=AnyCPU
 
     - name: Run tests
-      run: dotnet test
+      run: dotnet test 
