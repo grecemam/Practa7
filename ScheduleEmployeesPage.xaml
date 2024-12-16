@@ -1,0 +1,90 @@
+﻿<Page x:Class="DentalClinic.ScheduleEmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:DentalClinic"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Управление расписанием" FontFamily="Bahnschrift">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Основной контент -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Список сотрудников -->
+            <GroupBox Margin="5" Style="{StaticResource MaterialDesignGroupBox}" materialDesign:ColorZoneAssist.Mode="Custom"
+                      materialDesign:ColorZoneAssist.Background="#FF0A1129"
+                      materialDesign:ColorZoneAssist.Foreground="White" Header="Сотрудники" Grid.Column="0">
+                <StackPanel>
+                    <DataGrid x:Name="EmployeesDataGrid" 
+                              AutoGenerateColumns="False" 
+                              IsReadOnly="True"
+                              Background="#FF0A1129"
+                              Foreground="White"
+                              Height="auto" Margin="5" SelectionChanged="EmployeesDataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Foreground="White" Binding="{Binding schedule_id}" Width="50">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="ID" Foreground="White"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Foreground="White" Binding="{Binding EmployeeName}" Width="100">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Имя" Foreground="White"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Foreground="White" Binding="{Binding EmployeeLastName}" Width="100">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Фамилия" Foreground="White"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Foreground="White" Binding="{Binding DayName}" Width="130">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="День" Foreground="White"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Foreground="White" Binding="{Binding ShiftTime}" Width="150">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Время" Foreground="White"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Управление расписанием -->
+            <GroupBox Header="Изменить расписание" Foreground="White" Style="{StaticResource MaterialDesignGroupBox}" materialDesign:ColorZoneAssist.Mode="Custom"
+                      materialDesign:ColorZoneAssist.Background="#FF0A1129"
+                      materialDesign:ColorZoneAssist.Foreground="White" Margin="5" Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="День недели:" Margin="5" Foreground="Black"/>
+                    <ComboBox x:Name="DayComboBox" Margin="5" Width="200" 
+                              DisplayMemberPath="DayName" Foreground="Black" SelectedValuePath="DayId" />
+
+                    <TextBlock Text="Смена:" Margin="5" Foreground="Black"/>
+                    <ComboBox x:Name="ShiftComboBox" Margin="5" Width="200"
+                              DisplayMemberPath="ShiftTime" Foreground="Black" SelectedValuePath="ShiftId" />
+
+                    <Button Content="Обновить расписание" 
+                            Margin="5" Width="200" 
+                            Click="UpdateScheduleButton_Click"
+                            Background="#FF0A1129" BorderBrush="#FF050C31"/>
+
+                    <TextBlock x:Name="StatusTextBlock" 
+                               Text="" Margin="5" Foreground="Green" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Page>

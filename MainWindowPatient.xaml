@@ -1,0 +1,51 @@
+﻿<Window x:Class="DentalClinic.MainWindowPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalClinic"
+        mc:Ignorable="d"
+        Title="MainWindowPatient" Height="750" Width="1500" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Background="#FF0A1129">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Боковая панель -->
+        <Border Grid.Column="0" Background="#FF0A1129" VerticalAlignment="Stretch" >
+            <Grid>
+                <!-- Основное содержимое боковой панели -->
+                <StackPanel>
+                    <!-- Заголовок и версия -->
+                    <TextBlock Text="MelDental" FontSize="18" FontWeight="Bold" Foreground="White" Margin="10,20,0,5"/>
+                    <Separator Background="White" Height="1" Margin="0,10,0,10"/>
+
+                    <!-- Выпадающее меню для раздела "Записи и направления" -->
+                    <Expander Header="Главная" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock Text="Записи" FontSize="14" Foreground="White" Margin="23,5" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp_1"/>
+                            </StackPanel>
+                    </Expander>
+
+                    <!-- Выпадающее меню для раздела "Медкарта" -->
+                    <Expander Header="Медкарта" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock Text="Приёмы" FontSize="14" Foreground="White" Margin="25,5" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"/>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                <!-- Элемент, размещенный внизу -->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,670,0,0" Width="210">
+                    <Separator Background="White" Height="1" Margin="0,0,5,10"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="NamePatient" Text="Полис ОМС: Ирина" FontSize="14" Foreground="White" Margin="0,0,5,0"/>
+                        <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent">
+                            <Image  Width="16" Height="16"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Frame x:Name="MainFrame" Background="#FFFFD5B8" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

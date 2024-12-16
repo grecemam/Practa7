@@ -1,0 +1,87 @@
+﻿<Page x:Class="DentalClinic.EmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:DentalClinic"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900" FontFamily="Bahnschrift"
+      Title="EmployeesPage">
+
+    <Grid Margin="10">
+        <!-- Определение строк -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Для фильтров -->
+            <RowDefinition Height="*"/>
+            <!-- Для таблицы -->
+            <RowDefinition Height="Auto"/>
+            <!-- Для кнопок управления -->
+        </Grid.RowDefinitions>
+
+        <!-- Фильтры -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="0,0,10,0" 
+         VerticalAlignment="Center" materialDesign:HintAssist.Hint="Поиск по имени..." />
+            <ComboBox x:Name="PostFilterComboBox" Width="140" Margin="0,0,10,0" 
+          VerticalAlignment="Center" materialDesign:HintAssist.Hint="Выберите должность" />
+            <ComboBox x:Name="SpecializationFilterComboBox" Width="170" Margin="0,0,10,0" 
+          VerticalAlignment="Center" materialDesign:HintAssist.Hint="Выберите специализацию" />
+            <ComboBox x:Name="RoleFilterComboBox" Width="110" Margin="0,0,10,0" 
+              VerticalAlignment="Center" materialDesign:HintAssist.Hint="Выберите роль" />
+            <Button Background="#0A1129" BorderBrush="#FF050D3A" Foreground="White" Content="Найти" Width="100" VerticalAlignment="Center" Click="SearchButton_Click"/>
+        </StackPanel>
+
+        <!-- Таблица с прокруткой -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <DataGrid Background="#0A1129" x:Name="EmployeesDataGrid" AutoGenerateColumns="False" 
+                      CanUserAddRows="False" IsReadOnly="True" Margin="0,0,0,10"  SelectionChanged="EmployeesDataGrid_SelectionChanged">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="Ubuntu"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Background" Value="#0A1129"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="10,10"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="50" Foreground="White"/>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding full_name}" Width="230" Foreground="White"/>
+                    <DataGridTextColumn Header="Должность" Binding="{Binding post}" Width="150" Foreground="White"/>
+                    <DataGridTextColumn Header="Специализация" Binding="{Binding specialization}" Width="150" Foreground="White"/>
+                    <DataGridTextColumn Header="Роль" Binding="{Binding role}" Width="110" Foreground="White"/>
+                    <DataGridTextColumn Header="Контакты" Binding="{Binding contact_details}" Width="150" Foreground="White"/>
+                    <DataGridTextColumn Header="Опыт (лет)" Binding="{Binding experience}" Width="100" Foreground="White"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <!-- Форма редактирования сотрудников -->
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,0,0,10">
+            <TextBlock Text="Добавить/Изменить сотрудника" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBox x:Name="FullNameTextBox" materialDesign:HintAssist.Hint="ФИО" Margin="0,5" />
+                <ComboBox x:Name="PostComboBox" materialDesign:HintAssist.Hint="Должность" Margin="0,5" />
+                <ComboBox x:Name="SpecializationComboBox" materialDesign:HintAssist.Hint="Специализация" Margin="0,5" />
+                <ComboBox x:Name="RolesComboBox" materialDesign:HintAssist.Hint="Роль" Margin="0,5" />
+                <TextBox x:Name="ContactTextBox" materialDesign:HintAssist.Hint="Контакты" Margin="0,5" />
+                <TextBox x:Name="ExperienceTextBox" materialDesign:HintAssist.Hint="Опыт (лет)" Margin="0,5" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10">
+                <Button Content="Добавить" Background="#0A1129" BorderBrush="#FF050D3A" 
+                        Foreground="White" Width="100" Margin="0,0,10,0" Click="AddEmployeeButton_Click" />
+                <Button Content="Изменить" Background="#0A1129" BorderBrush="#FF050D3A" 
+                        Foreground="White" Width="100" Click="EditEmployeeButton_Click" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Кнопки навигации -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,20" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button Content="Назад" Width="150" Background="#FFB20505" BorderBrush="#FF810404" Click="BackButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

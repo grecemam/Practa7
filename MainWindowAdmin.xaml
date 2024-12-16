@@ -1,0 +1,63 @@
+﻿<Window x:Class="DentalClinic.MainWindowAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalClinic"
+        mc:Ignorable="d"
+        Title="MainWindowAdmin" Height="750" Width="1500" WindowStartupLocation="CenterScreen" FontFamily="Bahnschrift" Background="#FF0A1129">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Боковая панель -->
+        <Border Grid.Column="0" Background="#FF0A1129" VerticalAlignment="Stretch" >
+            <Grid>
+                <!-- Основное содержимое боковой панели -->
+                <StackPanel>
+                    <!-- Заголовок и версия -->
+                    <TextBlock Text="MelDental" FontSize="18" FontWeight="Bold" Foreground="White" Margin="10,20,0,5"/>
+                    <Separator Background="White" Height="1" Margin="0,10,0,10"/>
+
+                    <!-- Выпадающее меню для раздела "Записи и направления" -->
+                    <Expander Header="Главная" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock x:Name="PatientReportsTb" Text="Отчёты по пациентам" FontSize="14" Foreground="White" Margin="23,5" MouseLeftButtonUp="PatientReportsTb_MouseLeftButtonUp"/>
+                            <TextBlock x:Name="ServicesReportsTb"  Text="Отчёты по услугам" FontSize="14" Foreground="White" Margin="23,5"  MouseLeftButtonUp="ServicesReportsTb_MouseLeftButtonUp"/>
+                        </StackPanel>
+                    </Expander>
+
+                    <!-- Выпадающее меню для раздела "Медкарта" -->
+                    <Expander Header="Расписание" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock x:Name="ScheduleEmplTb" Text="Расписание врачей" FontSize="14" Foreground="White" Margin="25,5" MouseLeftButtonUp="ScheduleEmplTb_MouseLeftButtonUp" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="Записи" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock x:Name="ScheduleUsersTb" Text="Записи пациентов" FontSize="14" Foreground="White" Margin="25,5" MouseLeftButtonUp="ScheduleUsersTb_MouseLeftButtonUp" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="Сотрудники" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock x:Name="EmployeeTb" Text="Управление сотрудниками" FontSize="14" Foreground="White" Margin="25,5" MouseLeftButtonUp="EmployeeTb_MouseLeftButtonUp" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="Материалы" FontSize="16" Foreground="White" Background="#FF0A1129" Margin="10,5">
+                        <StackPanel>
+                            <TextBlock x:Name="CountMaterTb" Text="Количество материалов" FontSize="14" Foreground="White" Margin="25,5" MouseLeftButtonUp="CountMaterTb_MouseLeftButtonUp" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,670,0,0" Width="210">
+            <Separator Background="White" Height="1" Margin="0,0,5,10"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="NamePatient" Text="Панель администратора" FontSize="14" Foreground="White" Margin="0,0,5,0"/>
+            </StackPanel>
+        </StackPanel>
+        <Frame x:Name="MainFrame" Background="#FFFFD5B8" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
