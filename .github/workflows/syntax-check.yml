@@ -1,29 +1,31 @@
-name: Build and Analyze
+name: CI Pipeline
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 7.0.x
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x' # Укажите версию .NET SDK, которую используете в вашем проекте
 
-      - name: Install dependencies
-        run: dotnet restore
+    - name: Restore dependencies
+      run: dotnet restore
 
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore
+    - name: Build project
+      run: dotnet build --no-restore --configuration Release
 
-      - name: Run Code Analysis
-        run: dotnet build --configuration Release /p:TreatWarningsAsErrors=true
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
