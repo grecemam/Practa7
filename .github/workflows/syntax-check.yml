@@ -1,32 +1,29 @@
-name: Syntax Check
+name: Build and Analyze
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
 
-    - name: Restore NuGet packages
-      run: dotnet restore
+      - name: Install dependencies
+        run: dotnet restore
 
-    - name: Build the project
-      run: dotnet build --configuration Release --no-restore
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Run syntax check with Roslyn Analyzers
-      run: |
-        dotnet build --configuration Debug /p:WarningLevel=4 /warnaserror
+      - name: Run Code Analysis
+        run: dotnet build --configuration Release /p:TreatWarningsAsErrors=true
