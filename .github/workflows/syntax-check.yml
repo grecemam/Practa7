@@ -27,7 +27,7 @@ jobs:
         run: dotnet restore
 
       - name: Run dotnet format
-        run: dotnet format --verify-no-changes
+        run: dotnet format DentalClinic.sln --verify-no-changes
         continue-on-error: false
 
       - name: Run Roslyn Analyzers
