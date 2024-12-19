@@ -30,10 +30,10 @@ jobs:
       run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
 
     - name: install dotnet
-      run: .\dotnet-install.ps1 -Version "4.7.2" -InstallDir .\
+      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
     - name: test msbuild
-      run: .\dotnet msbuild .\DentalClinic.csproj
+      run: msbuild
 
     - name: install Nuget
       run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .\
