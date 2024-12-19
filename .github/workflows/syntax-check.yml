@@ -21,10 +21,11 @@ jobs:
       run: powershell
     
     - name: download dotnet
-      run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
+      run: curl -o dotnetfx472_full_x64.exe https://download.microsoft.com/download/5/7/6/5765D4A5-1D1F-4670-BD97-EB2A4D2D2E6D/dotnetfx472_full_x64.exe
+
 
     - name: install dotnet
-      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
+      run: dotnetfx472_full_x64.exe /q /norestart
     
     - name: test msbuild
       run: .\dotnet msbuild
