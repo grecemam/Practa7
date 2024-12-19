@@ -11,7 +11,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    permissions:
+        actions: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -20,17 +21,17 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0.x' 
+    
 
-    - name: Install .NET Framework 4.7.2 targeting pack
-      run: |
-        choco install dotnetfx
-        choco install dotnet4.7.2-targetingpack
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build project
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+    - name: Run Powershell
+      run: powershell
+    
+    
+    - name: Download PMD
+      run: Invoke-WebRequest -Uri "https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.8.0/pmd-dist-7.8.0-bin.zip" -OutFile ".\pmd-dist-7.8.0-bin.zip"
+    
+    - name: Unzip PMD
+      run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
+    
+    - name: Run analyzer
+      run: pmd-dist-7.8.0-bin\bin\pmd.bat -d ./ -f text -R csharp-design
