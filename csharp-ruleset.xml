@@ -5,16 +5,12 @@
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 
          http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
          xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
-    
+
     <description>
         A complex ruleset for C# that enforces best practices, design patterns, complexity management, and naming conventions.
     </description>
 
     <!-- C# Design Rules -->
-    <rule ref="category/csharp/design.xml/UseEmptyCatchBlock">
-        <priority>2</priority>
-    </rule>
-
     <rule ref="category/csharp/design.xml/TooManyFields">
         <priority>2</priority>
         <properties>
@@ -103,5 +99,4 @@
     <rule ref="category/csharp/bestpractices.xml/FinalLocalVariable">
         <priority>2</priority>
     </rule>
-
 </ruleset>
