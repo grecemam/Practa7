@@ -15,6 +15,8 @@ jobs:
       actions: write
     steps:
 
+    - name: List files
+      run: dir .\
     - name: Run powershell
       run: powershell
     
@@ -25,7 +27,7 @@ jobs:
       run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
     - name: test msbuild
-      run: dir
+      run: .\dotnet msbuild .\DentalClinic.csproj
 
     - name: install Nuget
       run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .\
