@@ -25,7 +25,7 @@ jobs:
 
 
     - name: install dotnet
-      run: dotnetfx472_full_x64.exe /q /norestart
+      run: ./dotnetfx472_full_x64.exe /q /norestart
     
     - name: test msbuild
       run: .\dotnet msbuild
