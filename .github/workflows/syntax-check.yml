@@ -29,4 +29,4 @@ jobs:
 
     
     - name: Run
-      run: ".\\pmd-dist-7.8.0-bin\\pmd-bin-7.8.0\\bin\\pmd.bat -d ./ -f text -R csharp-design" 
+      run: ".\\pmd-dist-7.8.0-bin\\pmd-bin-7.8.0\\bin\\pmd.bat check -d . --rulesets csharp-ruleset.xml" 

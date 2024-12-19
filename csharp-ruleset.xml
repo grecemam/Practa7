@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="C# Complex Ruleset"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 
+         http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    
+    <description>
+        A complex ruleset for C# that enforces best practices, design patterns, complexity management, and naming conventions.
+    </description>
+
+    <!-- C# Design Rules -->
+    <rule ref="category/csharp/design.xml/UseEmptyCatchBlock">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="category/csharp/design.xml/TooManyFields">
+        <priority>2</priority>
+        <properties>
+            <property name="maxfields" value="10"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/design.xml/TooManyMethods">
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" value="20"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/design.xml/ExcessiveMethodLength">
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="50"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/design.xml/ExcessiveClassLength">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" value="1000"/>
+        </properties>
+    </rule>
+
+    <!-- C# Naming Conventions -->
+    <rule ref="category/csharp/naming.xml/ClassNamingConventions">
+        <priority>1</priority>
+        <properties>
+            <property name="prefix" value="My"/>
+            <property name="suffix" value="Service"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/naming.xml/MethodNamingConventions">
+        <priority>1</priority>
+        <properties>
+            <property name="case" value="camel"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/naming.xml/FieldNamingConventions">
+        <priority>1</priority>
+        <properties>
+            <property name="case" value="camel"/>
+            <property name="prefix" value="m_"/>
+        </properties>
+    </rule>
+
+    <!-- C# Code Complexity Rules -->
+    <rule ref="category/csharp/complexity.xml/NPathComplexity">
+        <priority>2</priority>
+        <properties>
+            <property name="maximum" value="100"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/csharp/complexity.xml/CyclomaticComplexity">
+        <priority>2</priority>
+        <properties>
+            <property name="maximum" value="10"/>
+        </properties>
+    </rule>
+
+    <!-- C# Code Style and Cleanliness -->
+    <rule ref="category/csharp/codestyle.xml/UnusedPrivateMethod">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="category/csharp/codestyle.xml/UnusedPrivateField">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="category/csharp/codestyle.xml/UseVarForLocalVariable">
+        <priority>2</priority>
+    </rule>
+
+    <!-- C# Best Practices -->
+    <rule ref="category/csharp/bestpractices.xml/AvoidStaticMethod">
+        <priority>3</priority>
+    </rule>
+
+    <rule ref="category/csharp/bestpractices.xml/FinalLocalVariable">
+        <priority>2</priority>
+    </rule>
+
+</ruleset>
