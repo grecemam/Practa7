@@ -27,7 +27,7 @@ jobs:
       run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
 
     - name: install dotnet
-      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
+      run: .\dotnet-install.ps1 -Version "4.7.2" -InstallDir .\
     
     - name: test msbuild
       run: .\dotnet msbuild .\DentalClinic.csproj
