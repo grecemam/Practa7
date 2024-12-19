@@ -14,8 +14,6 @@ jobs:
     permissions:
       actions: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
 
     - name: Run powershell
       run: powershell
@@ -27,7 +25,7 @@ jobs:
       run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
     - name: test msbuild
-      run: .\dotnet build
+      run: .\dotnet msbuild
 
     - name: install Nuget
       run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .\
