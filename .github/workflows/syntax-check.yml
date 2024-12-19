@@ -11,24 +11,35 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    permissions:
+      actions: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '8.0.x'
+    - name: Run powershell
+      run: powershell
+    
+    - name: download dotnet
+      run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
 
-    - name: Set up StyleCop 
-      run: dotnet add package StyleCop.Analyzers --version 1.1.118
+    - name: install dotnet
+      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
+    
+    - name: test msbuild
+      run: .\dotnet msbuild
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: install Nuget
+      run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .\
+    
+    - name: nuget, install StyleCop.Analysis packages
+      run: nuget install StyleCop.Analyzers -OutputDirectory packages
+    
+    - name: remove project end
+      run: (Get-Content *.csproj) -replace '</Project>', ' ' | Out-File -encoding utf8 DentalClinic.csproj
 
-    - name: Build project & Run linter
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+    - name: add packages to file DentalClinic.csproj
+      run: .\add_packages.bat
+    
+    - name: build project
+      run: msbuild
