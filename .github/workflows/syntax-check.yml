@@ -21,14 +21,13 @@ jobs:
       run: powershell
     
     - name: download dotnet
-      run: curl -o dotnetfx472_full_x64.exe https://download.microsoft.com/download/5/7/6/5765D4A5-1D1F-4670-BD97-EB2A4D2D2E6D/dotnetfx472_full_x64.exe
-
+      run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
 
     - name: install dotnet
-      run: ./dotnetfx472_full_x64.exe /q /norestart
+      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
     - name: test msbuild
-      run: .\dotnet msbuild
+      run: .\dotnet build
 
     - name: install Nuget
       run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .\
