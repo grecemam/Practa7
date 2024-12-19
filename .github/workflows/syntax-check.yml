@@ -32,14 +32,12 @@ jobs:
     - name: install dotnet
       run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
-    - name: test msbuild
-      run: msbuild
 
     - name: install Nuget
       run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
     
     - name: nuget, install StyleCop.Analysis packages
-      run: nuget.exe install StyleCop.Analyzers -OutputDirectory packages
+      run: Install-Package StyleCop.Analyzers
     
     - name: remove project end
       run: (Get-Content *.csproj) -replace '</Project>', ' ' | Out-File -encoding utf8 DentalClinic.csproj
