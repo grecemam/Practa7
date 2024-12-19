@@ -27,5 +27,8 @@ jobs:
     - name: Unzip PMD
       run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
     
-    - name: Run analyzer
-      run: .\pmd-dist-7.8.0-bin\bin\pmd.bat
+    - name: CD to analyzer
+      run: cd .\pmd-dist-7.8.0-bin\bin\
+    
+    - name: Run
+      run: pmd.bat -d ./ -f text -R csharp-design
