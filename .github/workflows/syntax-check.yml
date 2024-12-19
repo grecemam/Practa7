@@ -28,4 +28,4 @@ jobs:
       run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
     
     - name: Run analyzer
-      run: cmd /c "echo Hello"
+      run: cmd /c "pmd-dist-7.8.0-bin\bin\pmd.bat -d .\ -f text -R csharp-design"
