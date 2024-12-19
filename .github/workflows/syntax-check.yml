@@ -11,22 +11,24 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    permissions:
-        actions: write
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Powershell
-      run: powershell
-    
-    
-    - name: Download PMD
-      run: Invoke-WebRequest -Uri "https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.8.0/pmd-dist-7.8.0-bin.zip" -OutFile ".\pmd-dist-7.8.0-bin.zip"
-    
-    - name: Unzip PMD
-      run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'
 
-    
-    - name: Run
-      run: ".\\pmd-dist-7.8.0-bin\\pmd-bin-7.8.0\\bin\\pmd.bat check -d . --rulesets csharp-ruleset.xml" 
+    - name: Set up StyleCop 
+      run: dotnet add package StyleCop.Analyzers --version 1.1.118
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project & Run linter
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
