@@ -26,9 +26,7 @@ jobs:
     
     - name: Unzip PMD
       run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
-    
-    - name: CD to analyzer
-      run: cd ".\pmd-dist-7.8.0-bin\pmd-bin-7.8.0\bin"
+
     
     - name: Run
-      run: dir
+      run: ".\\pmd-dist-7.8.0-bin\\pmd-bin-7.8.0\\bin\\pmd.bat"
