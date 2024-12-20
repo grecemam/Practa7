@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\mansu\shmel\Practa7\obj\Debug\
+C:\Users\maksi\OneDrive\4 курс\девопс\DentalClinic\obj\Debug\
 DentalClinic
 none
 false
 DEBUG;TRACE
-C:\Users\mansu\shmel\Practa7\App.xaml
+C:\Users\maksi\OneDrive\4 курс\девопс\DentalClinic\App.xaml
 141981314360
-12-460751860
-20-306923173
-482079744090
+12-1511655062
+211905955505
+48-2014489422
 AppointmentsClientPage.xaml;CardAppointmentsPage.xaml;ChooseSpecialistPage.xaml;EmployeesPage.xaml;LoginWindowEmployee.xaml;MainWindow.xaml;MainWindowAdmin.xaml;MainWindowDoctor.xaml;MainWindowPatient.xaml;MakeAppointmentPage.xaml;MaterialsPage.xaml;ScheduleEmployeesPage.xaml;ServicesReportsPage.xaml;UsersSchedulePage.xaml;
 
-False
+True
 

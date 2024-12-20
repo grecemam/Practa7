@@ -31,6 +31,7 @@ namespace DentalClinic
             InitializeComponent();
             LoadScheduleData();
         }
+
         private void LoadScheduleData()
         {
             // Загрузка дней недели
@@ -43,7 +44,9 @@ namespace DentalClinic
             ShiftComboBox.DisplayMemberPath = "ShiftTime";
             ShiftComboBox.SelectedValuePath = "shift_id";
             LoadSchedule();
+
         }
+
         private void LoadSchedule()
         {
             try
@@ -104,12 +107,14 @@ namespace DentalClinic
                 }
             }
         }
+
         private int? FindDayIdByName(string dayName)
         {
             var workDayTable = _workDaysTableAdapter.GetData();
             var postRow = workDayTable.FirstOrDefault(row => row["day_name"].ToString() == dayName);
             return postRow?["day_id"] as int?;
         }
+
         private int? FindShiftIdByTime(string shiftTime)
         {
             var shiftTable = _shiftsTableAdapter.GetData();

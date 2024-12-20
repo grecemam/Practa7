@@ -24,8 +24,8 @@ namespace DentalClinic
     /// </summary>
     public partial class CardAppointmentsPage : Page
     {
-        private readonly PatientsTableAdapter patientsTableAdapter;
         public int PatientID;
+        private readonly PatientsTableAdapter patientsTableAdapter;
         public CardAppointmentsPage(int patientID)
         {
             InitializeComponent();

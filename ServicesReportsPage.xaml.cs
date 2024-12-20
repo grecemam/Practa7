@@ -12,7 +12,6 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Linq;
-
 namespace DentalClinic
 {
     /// <summary>
@@ -28,6 +27,7 @@ namespace DentalClinic
             LoadChartData();
             LoadListData();
         }
+
         private void LoadChartData()
         {
             var dataTable = servicesTableAdapter.GetServiceReportForChart(null, null);
@@ -57,6 +57,7 @@ namespace DentalClinic
 
             ChartSeries = chartSeries;
         }
+
         private void LoadListData()
         {
             var dataTable = servicesTableAdapter.GetServiceReportForChart(null, null);

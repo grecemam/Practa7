@@ -55,7 +55,7 @@ namespace DentalClinic
         {
             if (AppointmentsDataGrid.SelectedItem is DataRowView selectedAppointment)
             {
-                if(selectedAppointment["status"].ToString() == "Завершено")
+                if (selectedAppointment["status"].ToString() == "Завершено")
                 {
                     StatusComboBox.IsEnabled = false;
                     AppointmentDatePicker.IsEnabled = false;
