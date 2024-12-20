@@ -12,21 +12,38 @@ jobs:
   build:
     runs-on: windows-latest
     permissions:
-        actions: write
+      actions: write
     steps:
+
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Run Powershell
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+  
+    - name: List files
+      run: dir .\
+    - name: Run powershell
       run: powershell
     
-    
-    - name: Download PMD
-      run: Invoke-WebRequest -Uri "https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.8.0/pmd-dist-7.8.0-bin.zip" -OutFile ".\pmd-dist-7.8.0-bin.zip"
-    
-    - name: Unzip PMD
-      run: Expand-Archive -Path ".\pmd-dist-7.8.0-bin.zip" -DestinationPath ".\pmd-dist-7.8.0-bin" -Force
+    - name: download dotnet
+      run: Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
 
+    - name: install dotnet
+      run: .\dotnet-install.ps1 -Channel LTS -InstallDir .\
     
-    - name: Run
-      run: ".\\pmd-dist-7.8.0-bin\\pmd-bin-7.8.0\\bin\\pmd.bat check -d . --rulesets csharp-ruleset.xml" 
+
+    - name: install Nuget
+      run: Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
+    
+    - name: nuget, install StyleCop.Analysis packages
+      run: Install-Package -Force StyleCop.Analyzers -Scope CurrentUser -Destination .\packages
+    
+    - name: remove project end
+      run: (Get-Content *.csproj) -replace '</Project>', ' ' | Out-File -encoding utf8 DentalClinic.csproj
+
+    - name: add packages to file DentalClinic.csproj
+      run: .\add_packages.bat
+    
+    - name: build project
+      run: msbuild
